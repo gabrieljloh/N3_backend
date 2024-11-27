@@ -5,19 +5,6 @@
 
 ---
 
-## *Sumário*
-
-1. [Visão Geral](#visão-geral)
-2. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-3. [Funcionalidades](#funcionalidades)
-4. [Estrutura do Projeto](#estrutura-do-projeto)
-5. [Endpoints da API](#endpoints-da-api)
-6. [Exemplos de Requisição e Resposta](#exemplos-de-requisição-e-resposta)
-7. [Como Rodar o Projeto](#como-rodar-o-projeto)
-8. [Considerações Finais](#considerações-finais)
-
----
-
 ## *Visão Geral*
 
 Este projeto consiste em uma *API RESTFUL* desenvolvida para gerenciar um sistema de *indústria, automação e processos*. A API possui operações CRUD para três principais recursos:
