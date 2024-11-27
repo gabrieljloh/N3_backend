@@ -37,11 +37,10 @@ A API foi construída utilizando o framework *Spring Boot*, com validação de d
 - *Spring Boot* – Framework para desenvolvimento de APIs RESTful
 - *Spring Data JPA* – Para interação com o banco de dados
 - *Hibernate* – Para mapeamento objeto-relacional (ORM)
-- *Jackson* – Para conversão de objetos Java para JSON e vice-versa
 - *Validation API* – Para validar dados de entrada
-- *JUnit* – Para testes unitários
 - *Maven* – Gerenciamento de dependências e build do projeto
 - *Postman* – Para testes da API
+- *H2* - Para banco de dados.
 
 ---
 
