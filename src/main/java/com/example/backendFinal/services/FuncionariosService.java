@@ -1,12 +1,14 @@
 package com.example.backendFinal.services;
 
+import com.example.backendFinal.dtos.FuncionariosRequestDTO;
+import com.example.backendFinal.dtos.FuncionariosResponseDTO;
+import com.example.backendFinal.mappers.FuncionariosMapper;
 import com.example.backendFinal.models.FuncionariosModel;
 import com.example.backendFinal.repositories.FuncionariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -15,28 +17,37 @@ public class FuncionariosService {
     @Autowired
     private FuncionariosRepository funcionariosRepository;
 
-    // Criar novo funcionário
-    public FuncionariosModel save(FuncionariosModel funcionario) {
-        return funcionariosRepository.save(funcionario);
+    @Autowired
+    private FuncionariosMapper funcionariosMapper;
+
+    // Salvar um novo funcionário
+    public FuncionariosResponseDTO save(FuncionariosRequestDTO funcionarioRequest) {
+        FuncionariosModel funcionario = new FuncionariosModel();
+        funcionario.setNome(funcionarioRequest.nome());
+        funcionario.setCargo(funcionarioRequest.cargo());
+        funcionario.setTurno(funcionarioRequest.turno());
+        funcionario.setStatus("Ativo"); // Pode ser um valor padrão ou vir do DTO
+        FuncionariosModel savedFuncionario = funcionariosRepository.save(funcionario);
+        return funcionariosMapper.toDto(savedFuncionario);
     }
 
-    // Listar todos os funcionários
-    public List<FuncionariosModel> findAll() {
-        return funcionariosRepository.findAll();
+    // Buscar todos os funcionários
+    public List<FuncionariosResponseDTO> findAll() {
+        List<FuncionariosModel> funcionarios = funcionariosRepository.findAll();
+        return funcionarios.stream()
+                .map(funcionariosMapper::toDto)
+                .toList();
     }
 
     // Buscar funcionário por ID
-    public Optional<FuncionariosModel> findById(UUID id) {
-        return funcionariosRepository.findById(id);
+    public FuncionariosResponseDTO findById(UUID id) {
+        FuncionariosModel funcionario = funcionariosRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+        return funcionariosMapper.toDto(funcionario);
     }
 
-    // Atualizar funcionário
-    public FuncionariosModel update(FuncionariosModel funcionario) {
-        return funcionariosRepository.save(funcionario);
-    }
-
-    // Deletar funcionário
-    public void deleteById(UUID id) {
+    // Deletar um funcionário por ID
+    public void delete(UUID id) {
         funcionariosRepository.deleteById(id);
     }
 }
